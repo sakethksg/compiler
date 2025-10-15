@@ -1,0 +1,134 @@
+
+# Run Commands
+
+### 1\. Calculator (`calc`)
+
+A simple calculator that evaluates basic arithmetic expressions.
+
+**Commands:**
+
+```bash 
+lex calc.l
+yacc -d calc.y
+gcc lex.yy.c y.tab.c -o calc
+./calc
+```
+
+**Sample Input:**
+
+```text
+3 + 5
+```
+
+-----
+
+### 2\. Abstract Syntax Tree Builder (`ast`)
+
+This program builds and displays an Abstract Syntax Tree (AST) for a given arithmetic expression.
+
+**Commands:**
+
+```bash
+lex ast.l
+yacc -d ast.y
+gcc lex.yy.c y.tab.c -o ast
+./ast
+```
+
+**Sample Input:**
+
+```text
+3+5*(10-4)
+```
+
+-----
+
+### 3\. String Equality Checker (`neq`)
+
+Checks if a string consists of an equal number of 'a's followed by an equal number of 'b's (e.g., `aabb`).
+
+**Commands:**
+
+```bash
+lex neq.l
+yacc -d neq.y
+gcc lex.yy.c y.tab.c -o neq -ll
+./neq
+```
+
+**Sample Input:**
+
+```text
+aabb
+abab
+```
+
+-----
+
+### 4\. Pattern Recognizer (`pattern`)
+
+Recognizes strings that follow the pattern `a*b+` (zero or more 'a's followed by one or more 'b's).
+
+**Commands:**
+
+```bash
+lex pattern.l
+yacc -d pattern.y
+gcc lex.yy.c y.tab.c -o pattern
+./pattern
+```
+
+**Sample Input:**
+
+```text
+ab
+aab
+aaab
+abbbaabba
+```
+
+-----
+
+### 5\. Three-Address Code Generator (`three_addr_generator`)
+
+Converts simple assignment statements into three-address code.
+
+**Commands:**
+
+```bash
+yacc -d three_addr.y
+lex three_addr.l
+gcc y.tab.c lex.yy.c -o three_addr_generator
+./three_addr_generator < input.txt
+```
+
+**Sample Input (`input.txt`):**
+
+```text
+a = b + c * d;
+x = a - e;
+y = (a + b) * (c + d);
+```
+
+-----
+
+### 6\. Simple Code Generator (`codegen`)
+
+Generates simple assembly-like code from three-address code statements.
+
+**Commands:**
+
+```bash
+yacc -d codegen.y
+lex codegen.l
+gcc y.tab.c lex.yy.c -o codegen
+./codegen
+```
+
+**Sample Input:**
+
+```text
+T1 := A + B
+T2 := C * D
+Result := T1 - T2
+```
