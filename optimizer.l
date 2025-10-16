@@ -1,17 +1,29 @@
 %{
-#include "y.tab.h"
+#include <stdio.h>
 #include <string.h>
-int yylex(void);
+#include "y.tab.h" 
 %}
 
 %%
 
-[0-9]+        { yylval.str = strdup(yytext); return NUMBER; }
-[a-zA-Z]+     { yylval.str = strdup(yytext); return ID; }
-[ \t]         ;             /* ignore spaces and tabs */
-\n            { return '\n'; }
-.             { return yytext[0]; }   /* return any other character */
+[0-9]+                  { 
+                            yylval.str = strdup(yytext); 
+                            return NUMBER; 
+                        }
+
+[a-zA-Z_][a-zA-Z0-9_]* { 
+                            yylval.str = strdup(yytext); 
+                            return ID; 
+                        }
+
+[ \t\r]+                ; /* Ignore whitespace, TABS, AND CARRIAGE RETURNS */
+
+\n                      { return '\n'; }
+
+.                       { return *yytext; }
 
 %%
 
-int yywrap() { return 1; }
+int yywrap(void) {
+    return 1;
+}
