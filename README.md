@@ -137,7 +137,10 @@ gcc y.tab.c lex.yy.c -o optimizer
 
 **Sample Input:**
 ```
-a = 2 * 3 + b * 1;  
-x = a + 0;
-y = (b * 0) + (c + 0);
+2 * 3 + b * 1  
+a + 0
+(b * 0) + (c + 0)
+x+0
+a*2
+a/2
 ```
