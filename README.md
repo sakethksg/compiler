@@ -123,3 +123,21 @@ T1 := A + B
 T2 := C * D
 Result := T1 - T2
 ```
+---
+## 7. Optimizer (`optimizer`)
+
+Implements basic optimization techniques for arithmetic expressions.
+**Build & Run:**
+```bash
+yacc -d optimizer.y
+lex optimizer.l
+gcc y.tab.c lex.yy.c -o optimizer
+./optimizer
+```
+
+**Sample Input:**
+```
+a = 2 * 3 + b * 1;  
+x = a + 0;
+y = (b * 0) + (c + 0);
+```
