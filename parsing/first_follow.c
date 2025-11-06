@@ -58,7 +58,7 @@ int main() {
         if (xxx == 1)
             continue;
 
-        findfirst(c, 0, 0);
+        findfirst(c, 0, 1);
         ptr += 1;
         done[ptr] = c;
         printf("\nFirst(%c) = { ", c);
@@ -127,8 +127,8 @@ void follow(char c) {
     int i, j;
     if (production[0][0] == c)
         f[m++] = '$';
-    for (i = 0; i < 10; i++) {
-        for (j = 2; j < 10; j++) {
+    for (i = 0; i < count; i++) {
+        for (j = 1; production[i][j] != '\0'; j++) {
             if (production[i][j] == c) {
                 if (production[i][j + 1] != '\0')
                     followfirst(production[i][j + 1], i, j + 2);
@@ -147,17 +147,17 @@ void findfirst(char c, int q1, int q2) {
     }
     for (j = 0; j < count; j++) {
         if (production[j][0] == c) {
-            if (production[j][2] == '#') {
+            if (production[j][1] == '#') {
                 if (production[q1][q2] == '\0')
                     first[n++] = '#';
                 else if (production[q1][q2] != '\0' && (q1 != 0 || q2 != 0))
                     findfirst(production[q1][q2], q1, q2 + 1);
                 else
                     first[n++] = '#';
-            } else if (!isupper(production[j][2])) {
-                first[n++] = production[j][2];
+            } else if (!isupper(production[j][1])) {
+                first[n++] = production[j][1];
             } else {
-                findfirst(production[j][2], j, 3);
+                findfirst(production[j][1], j, 2);
             }
         }
     }
